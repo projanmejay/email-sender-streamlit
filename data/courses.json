@@ -1,0 +1,24 @@
+[
+  {
+    "id": "CSE101",
+    "code": "CSE101",
+    "name": "Introduction to Programming",
+    "receivers": [
+      {
+        "salutation": "Sir",
+        "email": "prof.smith@example.com"
+      }
+    ]
+  },
+  {
+    "id": "EE201",
+    "code": "EE201",
+    "name": "Basic Electrical Engineering",
+    "receivers": [
+      {
+        "salutation": "Sir",
+        "email": "janmejaybhuyan4@gmail.com"
+      }
+    ]
+  }
+]
