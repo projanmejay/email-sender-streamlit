@@ -1,23 +1,457 @@
 [
   {
-    "id": "CSE101",
-    "code": "CSE101",
-    "name": "Introduction to Programming",
+    "id": "HS001",
+    "name": "Prof. Kishor Goswami",
+    "code": "HS001",
     "receivers": [
       {
-        "salutation": "Sir",
-        "email": "prof.smith@example.com"
+        "name": "Kishor Goswami",
+        "email": "kishor@hss.iitkgp.ac.in",
+        "salutation": "Sir"
       }
     ]
   },
   {
-    "id": "EE201",
-    "code": "EE201",
-    "name": "Basic Electrical Engineering",
+    "id": "HS002",
+    "name": "Dr. Anwesha Aditya",
+    "code": "HS002",
     "receivers": [
       {
-        "salutation": "Sir",
-        "email": "janmejaybhuyan4@gmail.com"
+        "name": "Anwesha Aditya",
+        "email": "anwesha@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS003",
+    "name": "Dr. Dripto Bakshi",
+    "code": "HS003",
+    "receivers": [
+      {
+        "name": "Dripto Bakshi",
+        "email": "dripto@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS004",
+    "name": "Dr. Krittika Banerjee",
+    "code": "HS004",
+    "receivers": [
+      {
+        "name": "Krittika Banerjee",
+        "email": "krittikaban@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS005",
+    "name": "Dr. Bhagirath Behera",
+    "code": "HS005",
+    "receivers": [
+      {
+        "name": "Bhagirath Behera",
+        "email": "bhagirath@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS006",
+    "name": "Dr. Rima Bhattacharya",
+    "code": "HS006",
+    "receivers": [
+      {
+        "name": "Rima Bhattacharya",
+        "email": "rima@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS007",
+    "name": "Dr. Somdatta Bhattacharya",
+    "code": "HS007",
+    "receivers": [
+      {
+        "name": "Somdatta Bhattacharya",
+        "email": "somdatta@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS008",
+    "name": "Dr. Suhita Chatterjee",
+    "code": "HS008",
+    "receivers": [
+      {
+        "name": "Suhita Chatterjee",
+        "email": "suhita@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS009",
+    "name": "Dr. Siddhartha Chattopadhyay",
+    "code": "HS009",
+    "receivers": [
+      {
+        "name": "Siddhartha Chattopadhyay",
+        "email": "siddhartha@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS010",
+    "name": "Dr. Anuradha Choudry",
+    "code": "HS010",
+    "receivers": [
+      {
+        "name": "Anuradha Choudry",
+        "email": "anuradha.sanskrit@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS011",
+    "name": "Dr. S. S. Das",
+    "code": "HS011",
+    "receivers": [
+      {
+        "name": "S. S. Das",
+        "email": "ssd@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS012",
+    "name": "Dr. Sunandan Ghosh",
+    "code": "HS012",
+    "receivers": [
+      {
+        "name": "Sunandan Ghosh",
+        "email": "sunandan@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS013",
+    "name": "Dr. V. N. Giri",
+    "code": "HS013",
+    "receivers": [
+      {
+        "name": "V. N. Giri",
+        "email": "vng@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS014",
+    "name": "Prof. Gourishankar S. Hiremath",
+    "code": "HS014",
+    "receivers": [
+      {
+        "name": "Gourishankar S Hiremath",
+        "email": "gshiremath@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS015",
+    "name": "Dr. H. S. Komalesha",
+    "code": "HS015",
+    "receivers": [
+      {
+        "name": "H S Komalesha",
+        "email": "komalesha@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS016",
+    "name": "Dr. Bornini Lahiri",
+    "code": "HS016",
+    "receivers": [
+      {
+        "name": "Bornini Lahiri",
+        "email": "bornini@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS017",
+    "name": "Dr. Jitendra Mahakud",
+    "code": "HS017",
+    "receivers": [
+      {
+        "name": "Jitendra Mahakud",
+        "email": "jmahakud@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS018",
+    "name": "Prof. M. K. Mahalik",
+    "code": "HS018",
+    "receivers": [
+      {
+        "name": "M K Mahalik",
+        "email": "mkm@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS019",
+    "name": "Dr. Pulak Mishra",
+    "code": "HS019",
+    "receivers": [
+      {
+        "name": "Pulak Mishra",
+        "email": "pmishra@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS020",
+    "name": "Dr. Jenia Mukherjee",
+    "code": "HS020",
+    "receivers": [
+      {
+        "name": "Jenia Mukherjee",
+        "email": "jenia@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS021",
+    "name": "Dr. Anway Mukhopadhyay",
+    "code": "HS021",
+    "receivers": [
+      {
+        "name": "Anway Mukhopadhyay",
+        "email": "anway@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS022",
+    "name": "Prof. N. C. Nayak",
+    "code": "HS022",
+    "receivers": [
+      {
+        "name": "N C Nayak",
+        "email": "ncnayak@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS023",
+    "name": "Dr. Archana Patnaik",
+    "code": "HS023",
+    "receivers": [
+      {
+        "name": "Archana Patnaik",
+        "email": "archana@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS024",
+    "name": "Prof. Anubhab Pattanayak",
+    "code": "HS024",
+    "receivers": [
+      {
+        "name": "Anubhab Pattanayak",
+        "email": "anubhab@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS025",
+    "name": "Dr. Priyadarshi Patnaik",
+    "code": "HS025",
+    "receivers": [
+      {
+        "name": "Priyadarshi Patnaik",
+        "email": "bapi@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS026",
+    "name": "Dr. Dripta Piplai",
+    "code": "HS026",
+    "receivers": [
+      {
+        "name": "Dripta Piplai",
+        "email": "dripta@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS027",
+    "name": "Prof. R. K. Pradhan",
+    "code": "HS027",
+    "receivers": [
+      {
+        "name": "R K Pradhan",
+        "email": "rkpradhan@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS028",
+    "name": "Dr. Prantik Bagchi",
+    "code": "HS028",
+    "receivers": [
+      {
+        "name": "Prantik Bagchi",
+        "email": "prantik@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS029",
+    "name": "Dr. Rishabh Rai",
+    "code": "HS029",
+    "receivers": [
+      {
+        "name": "Rishabh Rai",
+        "email": "rishabh@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS030",
+    "name": "Dr. Mahima Raina",
+    "code": "HS030",
+    "receivers": [
+      {
+        "name": "Mahima Raina",
+        "email": "mahima@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS031",
+    "name": "Prof. M. K. Rao",
+    "code": "HS031",
+    "receivers": [
+      {
+        "name": "M K Rao",
+        "email": "mkrao@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS032",
+    "name": "Dr. Bimal Kishore Sahoo",
+    "code": "HS032",
+    "receivers": [
+      {
+        "name": "Bimal Kishore Sahoo",
+        "email": "bks@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS033",
+    "name": "Dr. Amrita Sen",
+    "code": "HS033",
+    "receivers": [
+      {
+        "name": "Amrita Sen",
+        "email": "amrita.sen@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS034",
+    "name": "Dr. Seema Singh",
+    "code": "HS034",
+    "receivers": [
+      {
+        "name": "Seema Singh",
+        "email": "seema@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS035",
+    "name": "Prof. K. B. L. Srivastava",
+    "code": "HS035",
+    "receivers": [
+      {
+        "name": "K B L Srivastava",
+        "email": "kbls@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS036",
+    "name": "Dr. Vikas Thakur",
+    "code": "HS036",
+    "receivers": [
+      {
+        "name": "Vikas Thakur",
+        "email": "thakurv@hss.iitkgp.ac.in",
+        "salutation": "Sir"
+      }
+    ]
+  },
+  {
+    "id": "HS037",
+    "name": "Dr. Binita Tiwari",
+    "code": "HS037",
+    "receivers": [
+      {
+        "name": "Binita Tiwari",
+        "email": "binita@hss.iitkgp.ac.in",
+        "salutation": "Ma'am"
+      }
+    ]
+  },
+  {
+    "id": "HS038",
+    "name": "Prof. I. S. Yadav",
+    "code": "HS038",
+    "receivers": [
+      {
+        "name": "I S Yadav",
+        "email": "yadavis@hss.iitkgp.ac.in",
+        "salutation": "Sir"
       }
     ]
   }
