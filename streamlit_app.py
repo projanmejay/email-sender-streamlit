@@ -94,7 +94,7 @@ if not st.session_state.logged_in:
             st.session_state.password = st.session_state.pwd_input
             st.session_state.logged_in = True
             st.session_state.login_submitted = False  # Reset for safety
-            st.experimental_rerun()
+            st.rerun()   # ✅ Latest API for rerun
         else:
             st.warning("Please fill in both email and password!")
 
