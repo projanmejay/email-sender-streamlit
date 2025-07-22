@@ -116,6 +116,11 @@ else:
             st.session_state.pwd_input = ""
             st.rerun()
 
+    # Prevent auto-scroll by using placeholder first
+    placeholder = st.empty()
+    with placeholder.container():
+        st.markdown("#### Enter Your Details Below")
+
     # Student info
     user_name = st.text_input("Your Name", key="name")
     user_roll = st.text_input("Your Roll Number", key="roll")
