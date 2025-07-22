@@ -48,7 +48,7 @@ if 'logged_in' not in st.session_state:
 courses = load_courses()
 
 # ——————————————————————————————————————————
-# PAGE 1: LOGIN (with st.form)
+# PAGE 1: LOGIN PAGE
 # ——————————————————————————————————————————
 
 if not st.session_state.logged_in:
@@ -61,14 +61,12 @@ if not st.session_state.logged_in:
    - Scroll to **2‑Step Verification**, and turn it ON.
 
 2. **Create an App Password**  
-   - After enabling 2FA, return to: https://myaccount.google.com/apppasswords    
-   - You may be asked to sign in your account.  
-   - Under App name write 'Mail'.    
+   - After enabling 2FA, go to: https://myaccount.google.com/apppasswords  
+   - Under App name write 'Mail'.  
    - Click **Create**.
 
 3. **Copy & Paste**  
-   - Google will display a **16‑character password**.  
-   - **Write the 16 digit code in the app password (with no spaces in between them) **
+   - Use the 16-character code here (no spaces).
 """)
 
     with st.form("login_form"):
@@ -83,17 +81,26 @@ if not st.session_state.logged_in:
             st.session_state.email = email_in
             st.session_state.password = pwd_in
             st.session_state.logged_in = True
-            st.experimental_rerun()
+            st.experimental_rerun()  # Redirect to next page
         except Exception as e:
-            st.error("Login failed: Please check your email and app password.")
-   # Streamlit automatically refreshes
+            st.error("❌ Login failed: Please check your email and app password.")
 
 # ——————————————————————————————————————————
-# PAGE 2: COURSE FORM & SEND BUTTONS
+# PAGE 2: COURSE SELECTION + EMAIL SEND
 # ——————————————————————————————————————————
 
 else:
     st.title("📚 Course Request")
+
+    # Optional logout button
+    if st.button("🚪 Logout"):
+        for key in ['logged_in', 'email', 'password']:
+            if key in st.session_state:
+                del st.session_state[key]
+        st.success("Logged out successfully.")
+        st.experimental_rerun()
+
+    st.success(f"Logged in as: {st.session_state.email}")
 
     # Student info
     user_name = st.text_input("Your Name", key="name")
@@ -107,7 +114,7 @@ else:
     st.markdown("---")
     st.write("#### Send individual emails:")
 
-    # For each selected course, show prof + send button
+    # Send button for each selected course's professor(s)
     for course_name in sel:
         crs = course_map[course_name]
         st.subheader(f"{crs['name']} ({crs['code']})")
@@ -126,11 +133,11 @@ else:
                             crs, r,
                             user_name, user_roll, year
                         )
-                        st.success(f"Sent to {r['email']}")
+                        st.success(f"✅ Sent to {r['email']}")
                     except Exception as e:
-                        st.error(f"Error: {e}")
+                        st.error(f"❌ Error sending to {r['email']}: {e}")
 
-    # Optional “Send All” master button
+    # Batch send option
     if st.button("📨 Send All Selected at Once"):
         report = []
         for course_name in sel:
