@@ -45,13 +45,10 @@ def send_email(sender_email, sender_password, course, receiver, user_name, user_
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
-if 'login_submitted' not in st.session_state:
-    st.session_state.login_submitted = False
-
 courses = load_courses()
 
 # ——————————————————————————————————————————
-# PAGE 1: LOGIN PAGE with auto second click workaround
+# PAGE 1: LOGIN (with st.form)
 # ——————————————————————————————————————————
 
 if not st.session_state.logged_in:
@@ -64,12 +61,14 @@ if not st.session_state.logged_in:
    - Scroll to **2‑Step Verification**, and turn it ON.
 
 2. **Create an App Password**  
-   - After enabling 2FA, go to: https://myaccount.google.com/apppasswords  
-   - Under App name write 'Mail'.  
+   - After enabling 2FA, return to: https://myaccount.google.com/apppasswords    
+   - You may be asked to sign in your account.  
+   - Under App name write 'Mail'.    
    - Click **Create**.
 
 3. **Copy & Paste**  
-   - Use the 16-character code here (no spaces).
+   - Google will display a **16‑character password**.  
+   - **Write the 16 digit code in the app password (with no spaces in between them) **
 """)
 
     with st.form("login_form"):
@@ -77,41 +76,17 @@ if not st.session_state.logged_in:
         pwd_in   = st.text_input("16‑char App Password", type="password", key="pwd_input")
         submit   = st.form_submit_button("Login")
 
-    # On first submit, set flag to True so next rerun triggers login attempt again
     if submit:
-        st.session_state.login_submitted = True
-
-    if st.session_state.login_submitted:
-        try:
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                smtp.login(email_in, pwd_in)
-            st.session_state.email = email_in
-            st.session_state.password = pwd_in
-            st.session_state.logged_in = True
-            st.session_state.login_submitted = False  # reset flag on success
-            st.experimental_rerun()
-            st.stop()
-        except Exception as e:
-            st.error("❌ Login failed: Please check your email and app password.")
-            st.session_state.login_submitted = False  # reset flag on failure
+        st.session_state.email = email_in
+        st.session_state.password = pwd_in
+        st.session_state.logged_in = True   # Streamlit automatically refreshes
 
 # ——————————————————————————————————————————
-# PAGE 2: COURSE SELECTION + EMAIL SEND
+# PAGE 2: COURSE FORM & SEND BUTTONS
 # ——————————————————————————————————————————
 
 else:
     st.title("📚 Course Request")
-
-    # Logout button with rerun + stop
-    if st.button("🚪 Logout"):
-        for key in ['logged_in', 'email', 'password']:
-            if key in st.session_state:
-                del st.session_state[key]
-        st.success("Logged out successfully.")
-        st.experimental_rerun()
-        st.stop()  # halt to prevent errors after rerun
-
-    st.success(f"Logged in as: {st.session_state.email}")
 
     # Student info
     user_name = st.text_input("Your Name", key="name")
@@ -125,7 +100,7 @@ else:
     st.markdown("---")
     st.write("#### Send individual emails:")
 
-    # Send button for each selected course's professor(s)
+    # For each selected course, show prof + send button
     for course_name in sel:
         crs = course_map[course_name]
         st.subheader(f"{crs['name']} ({crs['code']})")
@@ -144,11 +119,11 @@ else:
                             crs, r,
                             user_name, user_roll, year
                         )
-                        st.success(f"✅ Sent to {r['email']}")
+                        st.success(f"Sent to {r['email']}")
                     except Exception as e:
-                        st.error(f"❌ Error sending to {r['email']}: {e}")
+                        st.error(f"Error: {e}")
 
-    # Batch send option
+    # Optional “Send All” master button
     if st.button("📨 Send All Selected at Once"):
         report = []
         for course_name in sel:
