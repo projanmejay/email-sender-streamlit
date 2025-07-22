@@ -1,11 +1,11 @@
 [
   {
-    "id": "HS001",
-    "name": "Prof. Kishor Goswami",
-    "code": "HS001",
+    "id": "JB001",
+    "name": "Prof. Janmejay Bhuyan",
+    "code": "JB001",
     "receivers": [
       {
-        "name": "Kishor Goswami",
+        "name": "Janmejay Bhuyan",
         "email": "janmejaybhuyan4@gmail.com",
         "salutation": "Sir"
       }
