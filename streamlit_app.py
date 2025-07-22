@@ -77,9 +77,17 @@ if not st.session_state.logged_in:
         submit   = st.form_submit_button("Login")
 
     if submit:
-        st.session_state.email = email_in
-        st.session_state.password = pwd_in
-        st.session_state.logged_in = True   # Streamlit automatically refreshes
+        try:
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(email_in, pwd_in)
+            st.session_state.email = email_in
+            st.session_state.password = pwd_in
+            st.session_state.logged_in = True
+            st.success("Login successful! Please proceed.")
+            st.experimental_rerun()
+        except Exception as e:
+            st.error("Login failed: Please check your email and app password.")
+   # Streamlit automatically refreshes
 
 # ——————————————————————————————————————————
 # PAGE 2: COURSE FORM & SEND BUTTONS
