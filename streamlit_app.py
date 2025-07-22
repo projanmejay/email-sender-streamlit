@@ -83,7 +83,6 @@ if not st.session_state.logged_in:
             st.session_state.email = email_in
             st.session_state.password = pwd_in
             st.session_state.logged_in = True
-    
             st.experimental_rerun()
         except Exception as e:
             st.error("Login failed: Please check your email and app password.")
