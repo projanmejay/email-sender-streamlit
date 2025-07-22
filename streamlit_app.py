@@ -46,10 +46,13 @@ def send_email(sender_email, sender_password, course, receiver, user_name, user_
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
+if 'try_login' not in st.session_state:
+    st.session_state.try_login = False
+
 courses = load_courses()
 
 # ——————————————————————————————————————————
-# PAGE 1: LOGIN (with st.form)
+# PAGE 1: LOGIN
 # ——————————————————————————————————————————
 
 if not st.session_state.logged_in:
@@ -73,15 +76,20 @@ if not st.session_state.logged_in:
 """)
 
     with st.form("login_form"):
-        email_in = st.text_input("Your Gmail Address", key="email_input")
-        pwd_in   = st.text_input("16‑char App Password", type="password", key="pwd_input")
-        submit   = st.form_submit_button("Login")
+        st.text_input("Your Gmail Address", key="email_input")
+        st.text_input("16‑char App Password", type="password", key="pwd_input")
+        submit = st.form_submit_button("Login")
 
     if submit:
-        st.session_state.email = email_in
-        st.session_state.password = pwd_in
+        st.session_state.try_login = True
+
+    # Handle login outside the form
+    if st.session_state.try_login:
+        st.session_state.email = st.session_state.email_input
+        st.session_state.password = st.session_state.pwd_input
         st.session_state.logged_in = True
-        st.experimental_rerun()  # Force rerun to load the next page
+        st.session_state.try_login = False  # reset
+        st.experimental_rerun()
 
 # ——————————————————————————————————————————
 # PAGE 2: COURSE FORM & SEND BUTTONS
