@@ -45,8 +45,14 @@ def send_email(sender_email, sender_password, course, receiver, user_name, user_
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
-if 'try_login' not in st.session_state:
-    st.session_state.try_login = False
+if 'email_input' not in st.session_state:
+    st.session_state.email_input = ""
+
+if 'pwd_input' not in st.session_state:
+    st.session_state.pwd_input = ""
+
+if 'login_submitted' not in st.session_state:
+    st.session_state.login_submitted = False
 
 courses = load_courses()
 
@@ -78,17 +84,19 @@ if not st.session_state.logged_in:
         st.text_input("Your Gmail Address", key="email_input")
         st.text_input("16‑char App Password", type="password", key="pwd_input")
         submit = st.form_submit_button("Login")
+        if submit:
+            st.session_state.login_submitted = True
 
-    if submit:
-        st.session_state.try_login = True
-
-    # Handle login outside the form
-    if st.session_state.try_login:
-        st.session_state.email = st.session_state.email_input
-        st.session_state.password = st.session_state.pwd_input
-        st.session_state.logged_in = True
-        st.session_state.try_login = False  # reset
-        st.experimental_rerun()
+    # Do the actual login OUTSIDE the form after submit
+    if st.session_state.login_submitted:
+        if st.session_state.email_input != "" and st.session_state.pwd_input != "":
+            st.session_state.email = st.session_state.email_input
+            st.session_state.password = st.session_state.pwd_input
+            st.session_state.logged_in = True
+            st.session_state.login_submitted = False  # Reset for safety
+            st.experimental_rerun()
+        else:
+            st.warning("Please fill in both email and password!")
 
 # ——————————————————————————————————————————
 # PAGE 2: COURSE FORM & SEND BUTTONS
