@@ -94,7 +94,7 @@ if not st.session_state.logged_in:
             st.session_state.password = st.session_state.pwd_input
             st.session_state.logged_in = True
             st.session_state.login_submitted = False  # Reset for safety
-            st.rerun()   # ✅ Latest API for rerun
+            st.rerun()
         else:
             st.warning("Please fill in both email and password!")
 
@@ -104,6 +104,17 @@ if not st.session_state.logged_in:
 
 else:
     st.title("📚 Course Request")
+
+    # Logout button
+    col1, col2 = st.columns([8,2])
+    with col2:
+        if st.button("🔓 Logout"):
+            st.session_state.logged_in = False
+            st.session_state.email = ""
+            st.session_state.password = ""
+            st.session_state.email_input = ""
+            st.session_state.pwd_input = ""
+            st.rerun()
 
     # Student info
     user_name = st.text_input("Your Name", key="name")
