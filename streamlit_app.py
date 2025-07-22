@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit import experimental_rerun
 import smtplib
 import json
 from email.message import EmailMessage
@@ -79,7 +80,8 @@ if not st.session_state.logged_in:
     if submit:
         st.session_state.email = email_in
         st.session_state.password = pwd_in
-        st.session_state.logged_in = True   # Streamlit automatically refreshes
+        st.session_state.logged_in = True
+        st.experimental_rerun()  # Force rerun to load the next page
 
 # ——————————————————————————————————————————
 # PAGE 2: COURSE FORM & SEND BUTTONS
