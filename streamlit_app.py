@@ -45,10 +45,13 @@ def send_email(sender_email, sender_password, course, receiver, user_name, user_
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
+if 'login_submitted' not in st.session_state:
+    st.session_state.login_submitted = False
+
 courses = load_courses()
 
 # ——————————————————————————————————————————
-# PAGE 1: LOGIN PAGE
+# PAGE 1: LOGIN PAGE with auto second click workaround
 # ——————————————————————————————————————————
 
 if not st.session_state.logged_in:
@@ -74,17 +77,23 @@ if not st.session_state.logged_in:
         pwd_in   = st.text_input("16‑char App Password", type="password", key="pwd_input")
         submit   = st.form_submit_button("Login")
 
+    # On first submit, set flag to True so next rerun triggers login attempt again
     if submit:
+        st.session_state.login_submitted = True
+
+    if st.session_state.login_submitted:
         try:
             with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                 smtp.login(email_in, pwd_in)
             st.session_state.email = email_in
             st.session_state.password = pwd_in
             st.session_state.logged_in = True
+            st.session_state.login_submitted = False  # reset flag on success
             st.experimental_rerun()
-            st.stop()  # stop running so the page refreshes immediately
+            st.stop()
         except Exception as e:
             st.error("❌ Login failed: Please check your email and app password.")
+            st.session_state.login_submitted = False  # reset flag on failure
 
 # ——————————————————————————————————————————
 # PAGE 2: COURSE SELECTION + EMAIL SEND
@@ -93,13 +102,14 @@ if not st.session_state.logged_in:
 else:
     st.title("📚 Course Request")
 
-    # Optional logout button
+    # Logout button with rerun + stop
     if st.button("🚪 Logout"):
         for key in ['logged_in', 'email', 'password']:
             if key in st.session_state:
                 del st.session_state[key]
         st.success("Logged out successfully.")
         st.experimental_rerun()
+        st.stop()  # halt to prevent errors after rerun
 
     st.success(f"Logged in as: {st.session_state.email}")
 
