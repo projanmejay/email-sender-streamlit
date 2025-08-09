@@ -58,7 +58,7 @@ def send_email(sender_email, sender_password, course, receiver, user_name, user_
         Institute Wellness Group</p>
 
         <!-- Signature Image from URL -->
-        <img src="https://drive.google.com/file/d/1QFC9CCaswWw1YYAdjwushY6CM9XDhv65/view?usp=sharing" alt="Signature" style="max-width:600px; margin-top:10px;"><br>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLSjWVeQZAmphgxy9vB-ITY5y8y3pr0PALhg&s" alt="Signature" style="max-width:600px; margin-top:10px;"><br>
 
         <!-- Signature Text -->
         <p style="margin-top:5px;">
