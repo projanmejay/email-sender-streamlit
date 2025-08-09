@@ -11,28 +11,42 @@ def load_courses():
     with open('data/courses.json') as f:
         return json.load(f)
 
-def send_email(sender_email, sender_password, course, receiver, user_name, user_roll, year):
+def send_email(sender_email, sender_password, course, receiver, user_name, user_roll, year,
+               venue, whatsapp_link, group_number, contact_info):
     msg = EmailMessage()
     msg['From'] = sender_email
     msg['To'] = receiver['email']
-    msg['Subject'] = f"Course Request: {course['code']}"
+    msg['Subject'] = f"Invitation to Buddy Interaction Event"
 
     template = (
-        "{0},\n\n"
-        "I am {1}, {2}, a {5} year student and I have applied for your course '{3}' ({4}). "
-        "I am eagerly interested in this topic and I hope you will approve my request.\n\n"
-        "Thank You\n"
-        "{1}\n{2}"
+        "Hello Freshers!\n\n"
+        "You were wrong if you thought all the “fresher fun” was over! Once again, IWG is ecstatic to welcome you to our lively and diverse community. "
+        "As you continue this thrilling adventure, we understand that transitioning to a new environment can be both exciting and daunting. To ease this transition and help you connect with your fellow batchmates and seniors, "
+        "the Institute Wellness Group has come up with yet another edition of our yearly fresher’s exclusive event called \"Buddy Interaction.\"\n\n"
+
+        "Still got that “New to Campus” excitement in you? That desire to keep meeting more people, to make more friends. We’ve been there and we’ve felt it all. "
+        "So Institute Wellness Group is back with another edition of our yearly fresher’s exclusive event, “Buddy Interaction.” It's a chance to make new friends, diversify your friend group and have a fun time interacting with your batchies. "
+        "So do not forget to join us at below given time and place.\n\n"
+
+        "**Event Details:**\n"
+        f"Date: 10th of August’25\n"
+        f"Time: 2:30 pm\n"
+        f"Venue: {venue}\n"
+        f"WhatsApp Group: Please join using the following link: {whatsapp_link}\n"
+        f"Group Number: {group_number}\n\n"
+
+        "At \"Buddy Interaction,\" you'll have the opportunity to spend a lovely afternoon filled with lifelong memories with fellow freshers and seniors, learn about the campus, and ask any questions. "
+        "It's a great chance to build friendships and gain valuable insights into life at IIT Kharagpur.\n\n"
+
+        "Should you have any questions or need assistance, please feel free to contact the following individuals:\n"
+        f"{contact_info}\n\n"
+
+        "We look forward to meeting you at the event and helping you settle into your new home. Once again, welcome to IIT Kharagpur!\n\n"
+        "Warm regards,\n"
+        "Institute Wellness Group"
     )
-    body = template.format(
-        receiver['salutation'],
-        user_name,
-        user_roll,
-        course['name'],
-        course['code'],
-        year
-    )
-    msg.set_content(body)
+
+    msg.set_content(template)
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(sender_email, sender_password)
@@ -63,77 +77,67 @@ courses = load_courses()
 if not st.session_state.logged_in:
     st.title("🔐 Email Sender Login")
     st.markdown("""
-**Follow these steps to enable 2‑Step Verification and create a Gmail App Password:**
+**How to Enable Gmail for Sending Emails:**
 
-1. **Enable 2‑Step Verification**  
-   - Go to: https://myaccount.google.com/security  
-   - Scroll to **2‑Step Verification**, and turn it ON.
+1. **Enable 2-Step Verification**  
+   - https://myaccount.google.com/security
 
-2. **Create an App Password**  
-   - After enabling 2FA, return to: https://myaccount.google.com/apppasswords    
-   - You may be asked to sign in your account.  
-   - Under App name write 'Mail'.    
-   - Click **Create**.
+2. **Generate App Password**  
+   - https://myaccount.google.com/apppasswords  
+   - Choose 'Mail' as the app and 'Other' for the device.
 
-3. **Copy & Paste**  
-   - Google will display a **16‑character password**.  
-   - **Write the 16 digit code in the app password (with no spaces in between them) **
+3. **Copy the 16-character password without spaces**
 """)
 
     with st.form("login_form"):
         st.text_input("Your Gmail Address", key="email_input")
-        st.text_input("16‑char App Password", type="password", key="pwd_input")
+        st.text_input("16-character App Password", type="password", key="pwd_input")
         submit = st.form_submit_button("Login")
         if submit:
             st.session_state.login_submitted = True
 
-    # Do the actual login OUTSIDE the form after submit
     if st.session_state.login_submitted:
-        if st.session_state.email_input != "" and st.session_state.pwd_input != "":
+        if st.session_state.email_input and st.session_state.pwd_input:
             st.session_state.email = st.session_state.email_input
             st.session_state.password = st.session_state.pwd_input
             st.session_state.logged_in = True
-            st.session_state.login_submitted = False  # Reset for safety
+            st.session_state.login_submitted = False
             st.rerun()
         else:
-            st.warning("Please fill in both email and password!")
+            st.warning("Please enter both email and password.")
 
 # ——————————————————————————————————————————
-# PAGE 2: COURSE FORM & SEND BUTTONS
+# PAGE 2: EVENT EMAIL FORM
 # ——————————————————————————————————————————
 
 else:
-    st.title("📚 Course Request")
+    st.title("📨 Buddy Interaction Email Sender")
 
-    # Logout button
-    col1, col2 = st.columns([8,2])
+    col1, col2 = st.columns([8, 2])
     with col2:
         if st.button("🔓 Logout"):
-            st.session_state.logged_in = False
-            st.session_state.email = ""
-            st.session_state.password = ""
-            st.session_state.email_input = ""
-            st.session_state.pwd_input = ""
+            for key in st.session_state.keys():
+                del st.session_state[key]
             st.rerun()
 
-    # Prevent auto-scroll by using placeholder first
-    placeholder = st.empty()
-    with placeholder.container():
-        st.markdown("#### Enter Your Details Below")
-
-    # Student info
+    st.markdown("#### 👤 Your Details")
     user_name = st.text_input("Your Name", key="name")
     user_roll = st.text_input("Your Roll Number", key="roll")
-    year      = st.selectbox("Year of Study", ["1st", "2nd", "3rd", "4th", "5th"], key="year")
+    year = st.selectbox("Year of Study", ["1st", "2nd", "3rd", "4th", "5th"], key="year")
 
-    # Course selection
+    st.markdown("#### 📍 Event Details")
+    venue = st.text_input("Venue", key="venue")
+    whatsapp_link = st.text_input("WhatsApp Group Link", key="wa_link")
+    group_number = st.text_input("Group Number", key="group_no")
+    contact_info = st.text_area("Contact Info (e.g., names + numbers)", key="contact_info")
+
+    st.markdown("#### 📚 Select Courses / Professors to Send To")
     course_map = {c['name']: c for c in courses}
     sel = st.multiselect("Select Courses", list(course_map.keys()), key="sel_courses")
 
     st.markdown("---")
     st.write("#### Send individual emails:")
 
-    # For each selected course, show prof + send button
     for course_name in sel:
         crs = course_map[course_name]
         st.subheader(f"{crs['name']} ({crs['code']})")
@@ -150,13 +154,13 @@ else:
                             st.session_state.email,
                             st.session_state.password,
                             crs, r,
-                            user_name, user_roll, year
+                            user_name, user_roll, year,
+                            venue, whatsapp_link, group_number, contact_info
                         )
                         st.success(f"Sent to {r['email']}")
                     except Exception as e:
                         st.error(f"Error: {e}")
 
-    # Optional “Send All” master button
     if st.button("📨 Send All Selected at Once"):
         report = []
         for course_name in sel:
@@ -167,7 +171,8 @@ else:
                         st.session_state.email,
                         st.session_state.password,
                         crs, r,
-                        user_name, user_roll, year
+                        user_name, user_roll, year,
+                        venue, whatsapp_link, group_number, contact_info
                     )
                     report.append(f"✅ {crs['code']} → {r['email']}")
                 except Exception as e:
