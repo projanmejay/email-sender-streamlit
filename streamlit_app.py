@@ -63,11 +63,11 @@ courses = load_courses()
 if not st.session_state.logged_in:
     st.title("🔐 Email Sender Login")
     st.markdown("""
-**Follow these steps to enable 2‑Step Verification and create a Gmail App Password:**
+**Follow these steps to enable 2-Step Verification and create a Gmail App Password:**
 
-1. **Enable 2‑Step Verification**  
+1. **Enable 2-Step Verification**  
    - Go to: https://myaccount.google.com/security  
-   - Scroll to **2‑Step Verification**, and turn it ON.
+   - Scroll to **2-Step Verification**, and turn it ON.
 
 2. **Create an App Password**  
    - After enabling 2FA, return to: https://myaccount.google.com/apppasswords    
@@ -76,13 +76,14 @@ if not st.session_state.logged_in:
    - Click **Create**.
 
 3. **Copy & Paste**  
-   - Google will display a **16‑character password**.  
-   - **Write the 16 digit code in the app password (with no spaces in between them) **
+   - Google will display a **16-character password**.  
+   - **Write the 16 digit code in the app password (with no spaces in between them)**  
+   - Even if you paste with spaces, the app will remove them.
 """)
 
     with st.form("login_form"):
         st.text_input("Your Gmail Address", key="email_input")
-        st.text_input("16‑char App Password", type="password", key="pwd_input")
+        st.text_input("16-char App Password", type="password", key="pwd_input")
         submit = st.form_submit_button("Login")
         if submit:
             st.session_state.login_submitted = True
@@ -90,8 +91,14 @@ if not st.session_state.logged_in:
     # Do the actual login OUTSIDE the form after submit
     if st.session_state.login_submitted:
         if st.session_state.email_input != "" and st.session_state.pwd_input != "":
-            st.session_state.email = st.session_state.email_input
-            st.session_state.password = st.session_state.pwd_input
+
+            # ✅ REMOVE ALL SPACES from password (leading, trailing, and in between)
+            cleaned_password = st.session_state.pwd_input.replace(" ", "")
+
+            # (Optional) you can also strip outer spaces from email
+            st.session_state.email = st.session_state.email_input.strip()
+            st.session_state.password = cleaned_password
+
             st.session_state.logged_in = True
             st.session_state.login_submitted = False  # Reset for safety
             st.rerun()
@@ -106,7 +113,7 @@ else:
     st.title("📚 Course Request")
 
     # Logout button
-    col1, col2 = st.columns([8,2])
+    col1, col2 = st.columns([8, 2])
     with col2:
         if st.button("🔓 Logout"):
             st.session_state.logged_in = False
@@ -119,7 +126,7 @@ else:
     # Student info
     user_name = st.text_input("Your Name", key="name")
     user_roll = st.text_input("Your Roll Number", key="roll")
-    year      = st.selectbox("Year of Study", ["1st", "2nd", "3rd", "4th", "5th"], key="year")
+    year = st.selectbox("Year of Study", ["1st", "2nd", "3rd", "4th", "5th"], key="year")
 
     # Course selection
     course_map = {c['name']: c for c in courses}
